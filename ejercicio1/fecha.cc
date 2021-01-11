@@ -34,12 +34,12 @@ bool Fecha::EsBisiesto(int _anio){
 
 
 ///Método de comparar una fecha con otra
-bool comparar(const Fecha &dia1, const Fecha &dia2){
-        if (dia1._anio < dia2._anio)
+bool comparar(Fecha &dia1,Fecha &dia2){
+        if (dia1.GetAnio() < dia2.GetAnio())
         return true;
-        if (dia1._anio == dia2._anio && dia1._mes < dia2._mes)
+        if (dia1.GetAnio() == dia2.GetAnio() && dia1.GetMes() < dia2.GetMes())
         return true;
-        if (dia1._anio == dia2._anio && dia1._mes == dia2._mes && dia1._dia < dia2._dia)
+        if (dia1.GetAnio() == dia2.GetAnio() && dia1.GetMes() == dia2.GetMes() && dia1.GetDia() < dia2.GetDia())
         return true;
         return false;
 }
@@ -47,4 +47,16 @@ bool comparar(const Fecha &dia1, const Fecha &dia2){
 ///Método para ordenar cronológicamente las fechas
 void OrdenarFechas(Fecha arr[], int n) {
         std::sort(arr, arr+n, comparar);
+}
+
+int Fecha::GetDia(){
+        return dia;
+}
+
+int Fecha::GetMes(){
+        return mes;
+}
+
+int Fecha::GetAnio(){
+        return anio;
 }

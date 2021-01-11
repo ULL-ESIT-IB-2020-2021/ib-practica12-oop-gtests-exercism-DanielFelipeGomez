@@ -26,7 +26,9 @@ int main(int argc, char* argv[]){
 
     std::vector<int> vector_fechas;
     int i=0,o=0,u=1,w=2, n=0;
-    Fecha arr[]={{20, 1, 2017},{12, 11, 2060},{ 3, 12, 1956},{18, 10, 1982},{19, 4, 2011},{ 9, 7, 2013}};
+    Fecha::Fecha arr[]={{20, 1, 2017},{12, 11, 2060},{ 3, 12, 1956},{18, 10, 1982},{19, 4, 2011},{ 9, 7, 2013}};
+
+
 
     while(std::getline(texto_entrada,lineas)){
 
@@ -43,14 +45,17 @@ int main(int argc, char* argv[]){
      u+=3;
      w+=3;}
 
-     texto_salida<< arr[i]._dia<<arr[i]._mes<<arr[i]._anio;
+     OrdenarFechas(arr, n);
+     
+     texto_salida<< arr[i].GetDia()<<arr[i].GetMes()<<arr[i].GetAnio();
 
      n = sizeof(arr)/sizeof(arr[0]);
      
 
      for (int i=0; i<n; i++) {
-        texto_salida << arr[i]._dia << " " << arr[i]._mes << " " << arr[i]._anio << std::endl;
-     }
-     OrdenarFechas(arr, n);
+        texto_salida << arr[i].GetDia() << " " << arr[i].GetMes() << " " << arr[i].GetAnio() << std::endl;
+     };
+
+    
 
 }

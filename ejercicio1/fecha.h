@@ -27,7 +27,11 @@ class Fecha {
 
     bool comparar(Fecha, Fecha);
 
-    void OrdenarFechas(Fecha , int);
+    void OrdenarFechas(Fecha, int);
+
+    int GetDia();
+    int GetMes();
+    int GetAnio();
 
    private:
     

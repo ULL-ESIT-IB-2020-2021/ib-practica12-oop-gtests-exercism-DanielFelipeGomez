@@ -22,7 +22,7 @@ cmake_minimum_required(VERSION 3.1)  # Mandatory
 # set the project name 
 project(complejo                # Mandatory
     VERSION 1.0
-    DESCRIPTION "A simple CMake project for the complejo application"
+    DESCRIPTION "A simple CMake project for the Fibonacci Sum application"
     LANGUAGES CXX)
 
 # specify the C++ standard
@@ -40,52 +40,14 @@ set(CMAKE_CXX_FLAGS_RELEASE "-O3")
 # tell cmake where to look for *.h files
 include_directories(${PROJECT_SOURCE_DIR}/src)
 
-# create library " libtools "
-add_library(tools src/tools.cc)
-
 # Adds an executable target called "complejo" to be built from the source files listed in the command invocation.
 add_executable(complejo
     src/complejo.h
     src/complejo.cc
     src/complejos.cc)
 
-# tell the linker to bind these objects together
-# It's important to place target_link_libraries after the add_executable and find_package lines, so all linked components are known.
-target_link_libraries(complejo tools)
-
 # Add expected compiler features to a target.
 target_compile_features(complejo PRIVATE cxx_std_14)
 
 # Add compile options to a target.
 target_compile_options(complejo PRIVATE -Wall -Wextra -Wpedantic)
-
-
-############################################################
-# Build doxygen from CMake script
-# https://stackoverflow.com/questions/34878276/build-doxygen-from-cmake-script
-# https://cmake.org/cmake/help/latest/module/FindDoxygen.html
-############################################################
-
-find_package(Doxygen)
-option(BUILD_DOCUMENTATION "Create and install the documentation (requires Doxygen)" ${DOXYGEN_FOUND})
-
-if(BUILD_DOCUMENTATION)
-    if(NOT DOXYGEN_FOUND)
-         message(FATAL_ERROR "Doxygen is needed to build the documentation.")
-    endif()
-
-    set(doxyfile_in ${CMAKE_CURRENT_SOURCE_DIR}/complejo.Doxyfile)
-    set(doxyfile ${CMAKE_CURRENT_BINARY_DIR}/doxyfile)
-
-    configure_file(${doxyfile_in} ${doxyfile} @ONLY)
-
-    message("Doxygen build started.")
-
-    add_custom_target(doc ALL
-                      COMMAND ${DOXYGEN_EXECUTABLE} ${doxyfile_in}
-                      WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/doc
-                      COMMENT "Generating API documentation with Doxygen"
-                      VERBATIM)
-
-    #    install(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/html DESTINATION     share/doc)
-endif()
